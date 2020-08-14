@@ -1,0 +1,68 @@
+html, main, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+body{
+    background-color: #01012B;
+}
+h1{
+    text-align: center;
+    color: #D1F7FF;
+    font-size: 4.3rem;
+    margin-bottom: 0;
+    margin-top: 1rem;
+    font-family: 'Satisfy', cursive;
+    text-shadow: 1px 6px 2px #cc11f0, 0 0 0.1em #05D9E8, 0 0 0.2em #005678;
+    
+}
+
+.container{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+/*
+    HEADER INFORMATION
+*/
+
+header{
+    height: 25%;
+}
+
+.scoreboard{
+    display: flex;
+    justify-content: space-around;
+}
+
+/*
+    Tic-Tac-Toe board
+*/
+
+.board{
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row{
+    display: flex;
+    height: 25%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 20%;
+    font-size: 90px;
+    border: 1px solid white;
+    box-sizing: border-box;
+    margin: 0 0.08em;
+} 
