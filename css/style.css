@@ -4,7 +4,7 @@ html, main, body{
     margin: 0;
 }
 body{
-    background-color: #01012B;
+    background-color: white;
 }
 h1{
     text-align: center;
@@ -23,16 +23,94 @@ h1{
     flex-direction: column;
 }
 /*
+    POPUP INFO
+*/
+#popup{
+    background: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-form{
+    border: 1px solid black;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.bttn-section{
+    width: 100%;
+}
+
+.info-form button{
+    float: right;
+}
+.form-section:nth-child(2), .form-section:nth-child(3){
+    margin-top: .5rem;
+    width: 100%;
+}
+
+
+.form-section:last-child{
+    margin: .5rem 0;
+}
+
+.player-section{
+    
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/*
     HEADER INFORMATION
 */
 
-header{
-    height: 25%;
-}
-
 .scoreboard{
     display: flex;
+    flex-direction: column;
+    
+}
+
+.player-info{
+    display: flex;
     justify-content: space-around;
+}
+
+.player-turn{
+    text-align: center;
+}
+
+.reset-section{
+    margin: 0 auto;
+}
+/*
+    Player name and score
+*/
+
+.player-name, .player-one-score, .player-two-score{
+    color: white; 
+    text-shadow: 1px 1px 1px #00ff9f, 0 0 0.1em #bd00ff, 0 0 0.2em #005678;
+    font-family: 'Staatliches', cursive;
+}
+
+.x-style, .o-style{
+    font-family: 'Cantata One', serif;
+    text-shadow: 1px 1px 1px #00ff9f, 0 0 0.1em #bd00ff, 0 0 0.2em #005678;
+}
+
+.x-style{
+    color: #ff00c1;
+}
+
+.o-style{
+    color: 	#00FFFF;
 }
 
 /*
@@ -51,7 +129,6 @@ header{
     height: 25%;
     width: 100%;
     justify-content: center;
-    align-items: center;
     
 }
 
@@ -59,10 +136,54 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%;
-    width: 20%;
+    width: 10%;
     font-size: 90px;
-    border: 1px solid white;
     box-sizing: border-box;
-    margin: 0 0.08em;
 } 
+
+/*
+    Column Cell colors
+*/
+
+.col-0{
+    border-right: 1px solid #00FF00;
+    border-bottom: 1px solid #00FF00;
+}
+.col-1{
+    border-right: 1px solid #00FF00;
+    border-left: 1px solid #00FF00;
+    border-bottom: 1px solid #00FF00;
+}
+.col-2{
+    border-left: 1px solid #00FF00;
+    border-bottom: 1px solid #00FF00;
+}
+.col-3{
+    border-right: 1px solid #00FF00;
+    border-top: 1px solid #00FF00;
+    border-bottom: 1px solid #00FF00;
+}
+.col-4{
+    border-right: 1px solid #00FF00;
+    border-left: 1px solid #00FF00;
+    border-bottom: 1px solid #00FF00;
+    border-top: 1px solid #00FF00;
+}
+.col-5{
+    border-left: 1px solid #00FF00;
+    border-top: 1px solid #00FF00;
+    border-bottom: 1px solid #00FF00;
+}
+.col-6{
+    border-right: 1px solid #00FF00;
+    border-top: 1px solid #00FF00;
+}
+.col-7{
+    border-right: 1px solid #00FF00;
+    border-left: 1px solid #00FF00;
+    border-top: 1px solid #00FF00;
+}
+.col-8{
+    border-left: 1px solid #00FF00;
+    border-top: 1px solid #00FF00;
+}
