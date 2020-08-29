@@ -130,6 +130,8 @@ function updateUserName(){
 playBtn.addEventListener("click", closeForm, false);
 closeBtn.addEventListener("click", closeForm, false);
 
+/*----------    PLAYER OBJECT     ------------*/
+
 //Player object, can get/update player name and assign a symbol
 const Player = (name, symbol) => {
     let playerName = name;

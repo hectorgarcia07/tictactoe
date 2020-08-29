@@ -64,7 +64,6 @@ h1{
 }
 
 .player-section{
-    
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -73,12 +72,6 @@ h1{
 /*
     HEADER INFORMATION
 */
-
-.scoreboard{
-    display: flex;
-    flex-direction: column;
-    
-}
 
 .player-info{
     display: flex;
@@ -90,8 +83,11 @@ h1{
 }
 
 .reset-section{
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
+
+
 /*
     Player name and score
 */
