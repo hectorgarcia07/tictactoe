@@ -100,12 +100,17 @@ resetBtn.addEventListener("click", function () {
     popup.style.display = "flex";
 });
 
+//Closes pop up form and gets name 
+playBtn.addEventListener("click", closeForm, false);
+closeBtn.addEventListener("click", closeForm, false);
+
 //will be used to close the player input form
 function closeForm(e){
     e.preventDefault();
     popup.style.display = "none";
 
     updateUserName();
+    
 }
 
 //get user input and insert it on the header
@@ -117,7 +122,6 @@ function updateUserName(){
     if(playerOneName === ""){
         playerOneName = "Player One"
     }    
-
     if(playerTwoName === ""){
         playerTwoName = "Player Two"
     }
@@ -126,9 +130,6 @@ function updateUserName(){
     playerOneHeading.innerText = playerOneName;
     playerTwoHeading.innerText = playerTwoName;
 }
-
-playBtn.addEventListener("click", closeForm, false);
-closeBtn.addEventListener("click", closeForm, false);
 
 /*----------    PLAYER OBJECT     ------------*/
 
@@ -143,7 +144,3 @@ const Player = (name, symbol) => {
 
     return { getName, getSymbol, setName };
 }
-
-//stuff
-
-GameBoard.play();
