@@ -6,91 +6,119 @@ const playerOneInput = document.getElementById("player-one-name");
 const playerTwoInput = document.getElementById("player-two-name");
 const playerOneHeading = document.getElementById("player-one-heading");
 const playerTwoHeading = document.getElementById("player-two-heading");
-const board = document.getElementsByClassName("col");
+const board = Array.from(document.getElementsByClassName("col"));
+let PlayerOne;
+let PlayerTwo;
 
-//Will check for winners, reset board, place an X or O, add events to
-//each cell
+/*----------    PLAYER OBJECT     ------------*/
+
+//Store current players ifno
+const Player = (name, symbol) => {
+    let playerName = name;
+    let playerSymbol = symbol;
+
+    const getName = () => playerName;
+    const getSymbol = () => playerSymbol;
+
+    return { getName, getSymbol };
+}
+
+
+/*----------    GAMEBOARD OBJECT -----------*/
+
 const GameBoard = (() => {
-    //play game
-    const play = () => {
-        addEventToCells(); //make tiles clickable
-        
+    let gameOver = false;
+    let playerTurn = 1;
+
+    //return current player
+    const currPlayerName = () => {
+        return playerTurn == 1 ? PlayerOne.getName() : PlayerTwo.getName()
     }
 
-    //Determine if player can place cell in
-    const playerMove = () => {
-        let className = this.classList[1];
-        let tile = (playerTurn() === 1) ? 'X' : 'O';
+    //return current player tile
+    const currPlayerTile = () => {
+        return playerTurn == 1 ? PlayerOne.getSymbol() : PlayerTwo.getSymbol()
+    }
 
-        //check if move was valid
-        if (checkValidMove(tile, className)){
-            //check if player won
-            if( checkWinner(tile) ){
-                alert("Player won!");
-                removeEventFromCell();
-            }
-            else{
-                updateTurn();
-            }
-        }
+    //add click event to cells
+    const addEvents = () => {
+        board.forEach(cell => {
+            cell.addEventListener("click", makeMove);
+        });
     }
 
     //check if cell is empty
-    const checkValidMove = (tile, className) => {
-        if(className.innerText === ""){
-            className.innerText = tile;
-            return true;
-        }
-        return false;
+    const isEmptyCell = function(){
+        return (this.innerText == "") ? true : false
     }
 
-    //add events to cell
-    const addEventToCells = () => {
-        board.forEach(cell => { cell.addEventListener("click", playerMove) });
+    //place where user clicked
+    const placeTileOnCell = function(){
+        this.innerText = currPlayerTile();
     }
 
-    //remove events from cell
-    const removeEventFromCell = () => {
-        board.forEach(cell => { cell.removeEventListener("click", playerMove) });
-    }
+    const checkForWinner = function(){
+        let currTile = currPlayerTile();
 
-    //keep track of turn
-    let playerTurn = 1;
-
-    const updateTurn = () => { (playerTurn == 1) ? playerTurn++ : playerTurn--; }
-    const getPlayerTurn = () => playerTurn;
-
-    //check for winner
-    const checkWinner = (tile) => {
-        //check each row if player won
-        for(let i = 0; i <= 6; i+= 3){
-            if(board[i] === tile && board[i+1] === tile && board[i+2] === tile){
-                return true;
-            }
-        }
-        //check each column if player won
-        for (let i = 0; i < 3; i++) {
-            if (board[i] === tile && board[i+3] === tile && board[i+6] === tile) {
+        //check rows for winner
+        for(let i = 0; i < 9; i += 3){
+            if (board[i].textContent == currTile &&
+                board[i + 1].textContent == currTile &&
+                board[i + 2].textContent == currTile){
                 return true;
             }
         }
 
-        //check across if player won
-        if(board[0] === tile && board[4] === tile && board[8] === tile)
-        {
-            return true;
+        //check column for winner
+        for(let i = 0; i < 3; i++){
+            if (board[i].textContent == currTile &&
+                board[i + 3].textContent == currTile &&
+                board[i + 6].textContent == currTile){
+                return true;
+            }
         }
 
-        if (board[2] === tile && board[4] === tile && board[6] === tile) {
+        //check diagonal's for winner
+        if (board[0].textContent == currTile &&
+            board[4].textContent == currTile &&
+            board[8].textContent == currTile){
             return true;
         }
-    };
+        
+        if (board[2].textContent == currTile &&
+            board[4].textContent == currTile &&
+            board[6].textContent == currTile){
+            return true;
+        }
+        
+        //no winners found
+        return false
+    }
 
-    return { play };
+    const makeMove = function(){
+        //continue game untill there is a winner
+        if(!gameOver){
+            //check to see if cell is empty
+            if(isEmptyCell.call(this)){
+                placeTileOnCell.call(this);
+
+                //if there was a winner, then stop the game
+                //otherwise continue playing
+                if( checkForWinner() ){
+                    console.log(currPlayerName())
+                    gameOver = true;
+                }
+                else{
+                    console.log("stuff")
+                    //update the players turn
+                    playerTurn == 1 ? playerTurn++ : playerTurn--
+                }
+            }
+        }
+    }
+
+    return {addEvents, makeMove}
 })();
-
-//reset board
-//place tile
 
 /* ------------------ INPUT FORM ------------------*/
 
@@ -111,9 +139,11 @@ function closeForm(e){
 
     updateUserName();
     
+    //the game should now start
+    
 }
 
-//get user input and insert it on the header
+/*--- Update HTML header with user name and update name objects */
 function updateUserName(){
     let playerOneName = playerOneInput.value;
     let playerTwoName = playerTwoInput.value;
@@ -126,21 +156,14 @@ function updateUserName(){
         playerTwoName = "Player Two"
     }
 
+    //update player object data
+    PlayerOne = Player(playerOneName, "X")
+    PlayerTwo = Player(playerTwoName, "O");
+
     //update the players name
     playerOneHeading.innerText = playerOneName;
     playerTwoHeading.innerText = playerTwoName;
 }
 
-/*----------    PLAYER OBJECT     ------------*/
-
-//Player object, can get/update player name and assign a symbol
-const Player = (name, symbol) => {
-    let playerName = name;
-    let playerSymbol = symbol;
-
-    const getName = () => playerName;
-    const getSymbol = () => playerSymbol;
-    const setName = (newName) => playerName = newName;
-
-    return { getName, getSymbol, setName };
-}
+GameBoard.addEvents(); //make cells clickable
+GameBoard.makeMove(); //listens for a cell that has been clicked
