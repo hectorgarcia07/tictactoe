@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+
+
     <link href="https://fonts.googleapis.com/css2?family=Cantata+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Tic-Tac-Toe</title>
@@ -19,48 +22,48 @@
                         <button id="close-Btn"><i class="fa fa-close"></i></button>
                     </div>
                     <div class="player-section form-section">
-                        <label for="player-one-name">Player one name</label>
+                        <label for="player-one-name" class="player-one-name">Player one name</label>
                         <input type="text" id="player-one-name" placeholder="Player One" 
                                                                         maxlength="10">
                     </div>
                     <div class="player-section form-section">
-                        <label for="player-two-name">Player two name</label>
+                        <label for="player-two-name" class="player-two-name">Player two name</label>
                         <input type="text" id="player-two-name" placeholder="Player Two"
                                                                         maxlength="10">
                     </div>
                     <input id="form-btn" class="form-section" type="submit" id="player-names" value="Play!">
                 </form>
             </div>
-
-            <header>
-                <h1 class="Title">Tic-Tac-Toe</h1>
-                <div class="scoreboard">
+           
+            <div id="GamePage">
+                <header>
+                    <h1>Tic-Tac-Toe</h1>
                     <div class="player-info">
-                        <h2 class="player-name" id="player-one-heading"></h2>
+                        <h2 class="player-name X-style" id="player-one-heading"></h2>
                         <h2 class="player-name">VS</h2>
-                        <h2 class="player-name" id="player-two-heading"></h2>
+                        <h2 class="player-name O-style" id="player-two-heading"></h2>
                     </div>
-                    <h2 class="player-name player-turn">Turn: </h2>
+                    <h2 class="player-name player-turn"><span></span></h2>
                     <div class="reset-section">
                         <button id="restart">New Game</button>
+                    </div>            
+                </header>
+                <div class="board">
+                    <div class="row">
+                        <div class="col col-0"><span></span></div>
+                        <div class="col col-1"><span></span></div>
+                        <div class="col col-2"><span></span></div>
                     </div>
-                </div>
-            </header>
-            <div class="board">
-                <div class="row">
-                    <div class="col col-0">d</div>
-                    <div class="col col-1"></div>
-                    <div class="col col-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col col-3"></div>
-                    <div class="col col-4"></div>
-                    <div class="col col-5"></div>
-                </div>
-                <div class="row">
-                    <div class="col col-6"></div>
-                    <div class="col col-7"></div>
-                    <div class="col col-8"></div>
+                    <div class="row">
+                        <div class="col col-3"><span></span></div>
+                        <div class="col col-4"><span></span></div>
+                        <div class="col col-5"><span></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-6"><span></span></div>
+                        <div class="col col-7"><span></span></div>
+                        <div class="col col-8"><span></span></div>
+                    </div>
                 </div>
             </div>
         </div>

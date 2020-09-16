@@ -1,12 +1,16 @@
-const resetBtn = document.getElementById("restart");
-const popup = document.getElementById("popup");
-const closeBtn = document.getElementById("close-Btn");
-const playBtn = document.getElementById("form-btn");
-const playerOneInput = document.getElementById("player-one-name");
-const playerTwoInput = document.getElementById("player-two-name");
-const playerOneHeading = document.getElementById("player-one-heading");
-const playerTwoHeading = document.getElementById("player-two-heading");
-const board = Array.from(document.getElementsByClassName("col"));
+const resetBtn = document.getElementById("restart")
+const popup = document.getElementById("popup")
+const gamePage = document.getElementById("GamePage")
+const closeBtn = document.getElementById("close-Btn")
+const playBtn = document.getElementById("form-btn")
+const playerOneInput = document.getElementById("player-one-name")
+const playerTwoInput = document.getElementById("player-two-name")
+const playerOneHeading = document.getElementById("player-one-heading")
+const playerTwoHeading = document.getElementById("player-two-heading")
+const board = Array.from(document.getElementsByClassName("col"))
+
+const displayCurrentPlayer = document.getElementsByClassName("player-turn")[0].childNodes[0]
+
 let PlayerOne;
 let PlayerTwo;
 
@@ -24,20 +28,31 @@ const Player = (name, symbol) => {
 }
 
 
-/*----------    GAMEBOARD OBJECT -----------*/
+/*---------- GAMEBOARD OBJECT -----------*/
 
 const GameBoard = (() => {
     let gameOver = false;
     let playerTurn = 1;
 
-    //return current player
-    const currPlayerName = () => {
-        return playerTurn == 1 ? PlayerOne.getName() : PlayerTwo.getName()
+    //reset all cells to empty
+    const resetBoard = () =>{
+        board.forEach(cell => {
+            cell.childNodes[0].innerText = "" 
+            cell.childNodes[0].className = ""
+        })
+        gameOver = false
+        playerTurn = 1
     }
 
+    //return current player
+    const currPlayerName = () => playerTurn == 1 ? PlayerOne.getName() : PlayerTwo.getName()
+
     //return current player tile
-    const currPlayerTile = () => {
-        return playerTurn == 1 ? PlayerOne.getSymbol() : PlayerTwo.getSymbol()
+    const currPlayerTile = () => playerTurn == 1 ? PlayerOne.getSymbol() : PlayerTwo.getSymbol()
+
+    const updateTurnDisplay = () =>{
+        displayCurrentPlayer.innerText = currPlayerName() + " turn"
+        displayCurrentPlayer.className = currPlayerTile() + "-style"
     }
 
     //add click event to cells
@@ -54,8 +69,13 @@ const GameBoard = (() => {
 
     //place where user clicked
     const placeTileOnCell = function(){
-        this.innerText = currPlayerTile();
+        this.childNodes[0].innerText = currPlayerTile()
+        this.childNodes[0].className = currPlayerTile() + "-style"
     }
+
+    //if all cell's are full, then there is still place for a move
+    const checkForTie = () => board.every((cell) => cell.childNodes[0].innerText != "" )
+    
 
     const checkForWinner = function(){
         let currTile = currPlayerTile();
@@ -105,19 +125,25 @@ const GameBoard = (() => {
                 //if there was a winner, then stop the game
                 //otherwise continue playing
                 if( checkForWinner() ){
-                    console.log(currPlayerName())
                     gameOver = true;
+                    displayCurrentPlayer.innerText = currPlayerName() + " won!"
+                    displayCurrentPlayer.className = currPlayerTile() + "-style"
+                }
+                else if( checkForTie() ){
+                    gameOver = true;
+                    displayCurrentPlayer.innerText = "Tie!"
+                    displayCurrentPlayer.className = ""
                 }
                 else{
-                    console.log("stuff")
                     //update the players turn
                     playerTurn == 1 ? playerTurn++ : playerTurn--
+                    updateTurnDisplay();
                 }
             }
         }
     }
 
-    return {addEvents, makeMove}
+    return { addEvents, makeMove, resetBoard, checkForTie }
 })();
 
 /* ------------------ INPUT FORM ------------------*/
@@ -125,7 +151,10 @@ const GameBoard = (() => {
 //will be used to show the player input form
 resetBtn.addEventListener("click", function () {
     event.preventDefault();
+    GameBoard.resetBoard();
     popup.style.display = "flex";
+    gamePage.style.display = "none";
+    displayCurrentPlayer.className = ""
 });
 
 //Closes pop up form and gets name 
@@ -136,11 +165,9 @@ closeBtn.addEventListener("click", closeForm, false);
 function closeForm(e){
     e.preventDefault();
     popup.style.display = "none";
+    gamePage.style.display = "block";
 
     updateUserName();
-    
-    //the game should now start
-    
 }
 
 /*--- Update HTML header with user name and update name objects */
@@ -163,7 +190,10 @@ function updateUserName(){
     //update the players name
     playerOneHeading.innerText = playerOneName;
     playerTwoHeading.innerText = playerTwoName;
+
+    //update current player's turn
+    displayCurrentPlayer.innerText = playerOneName + " turn"
+    displayCurrentPlayer.className = "X-style"
 }
 
 GameBoard.addEvents(); //make cells clickable
-GameBoard.makeMove(); //listens for a cell that has been clicked

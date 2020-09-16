@@ -1,52 +1,96 @@
-html, main, body{
+html, body, main{
     height: 100%;
-    width: 100%;
+}
+
+body{
+    background-color: #ebe0d5;
     margin: 0;
 }
-body{
-    background-color: white;
-}
+
 h1{
     text-align: center;
-    color: #D1F7FF;
+    color: rgb(100, 100, 100);
     font-size: 4.3rem;
     margin-bottom: 0;
     margin-top: 0.1em;
     font-family: 'Satisfy', cursive;
-    text-shadow: 1px 6px 2px #cc11f0, 0 0 0.1em #05D9E8, 0 0 0.2em #005678;
     
 }
 h2{
-    margin: 0.5em;
+    margin: 0.5rem;
 }
 
 .container{
     display: flex;
-    height: 100%;
     flex-direction: column;
+    height: 100%;
 }
 /*
     POPUP INFO
 */
 #popup{
-    background: white;
-    width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+#close-Btn{
+    padding: 0.1em 0.6em;
+    background-color: rgb(231, 231, 231);
+    border: 1px solid grey;
+    outline: 0;
+
+}
+
+#close-Btn:hover{
+    border-color: rgb(39, 39, 39);
+}
+
 .info-form{
-    border: 1px solid black;
+    background-color: #e6dacc;
+    border: 1px solid #88827a;
     border-radius: 5px;
     width: 25%;
     display: flex;
     flex-direction: column;
-    padding: 0.5em;
+    padding: 0.5em 0.5em 0 0.5em;
     align-items: center;
+    box-shadow: 1px 1px #888888;
+}
+
+/* Style for label */
+.player-one-name, .player-two-name{
+    margin-bottom: 0.5em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    color: rgb(43, 43, 43)
+}
+
+/* Style for input */
+#player-one-name, #player-two-name{
+    border: 2px solid rgb(128, 128, 128);
+    padding: 0.5em 1em;
+}
+
+.form-section:nth-child(2){
+    margin-bottom: 0.4em;
+}
+
+/* Form button style */
+#form-btn, #restart{
+    font-size: 1.1rem;
+    font-family: 'Roboto', sans-serif;
+    border: 2px solid grey;
+    padding: 0.3em 0.5em;
+    margin: 0.6em 0;
+    border-radius: 6px;
+    outline: 0;
+
+}
+
+#form-btn:hover, #restart:hover{
+    border-color: black;
 }
 
 .bttn-section{
@@ -56,9 +100,15 @@ h2{
 .info-form button{
     float: right;
 }
+
 .form-section:nth-child(2), .form-section:nth-child(3){
     margin-top: .5rem;
     width: 100%;
+}
+
+/*---- GAME PAGE ----*/
+#GamePage{
+    display: none;
 }
 
 
@@ -78,6 +128,8 @@ h2{
 
 .player-info{
     display: flex;
+    width: 65%;
+    margin: 0 auto;
     justify-content: space-around;
 }
 
@@ -90,28 +142,24 @@ h2{
     justify-content: center;
 }
 
-
 /*
     Player name and score
 */
-
-.player-name, .player-one-score, .player-two-score{
-    color: white; 
-    text-shadow: 1px 1px 1px #00ff9f, 0 0 0.1em #bd00ff, 0 0 0.2em #005678;
-    font-family: 'Staatliches', cursive;
+.player-name{
+    color: rgb(82, 82, 82); 
+    font-family: 'Roboto', sans-serif;
 }
 
-.x-style, .o-style{
+.X-style, .O-style{
     font-family: 'Cantata One', serif;
-    text-shadow: 1px 1px 1px #00ff9f, 0 0 0.1em #bd00ff, 0 0 0.2em #005678;
 }
 
-.x-style{
-    color: #ff00c1;
+.X-style{
+    color: #aa0080;
 }
 
-.o-style{
-    color: 	#00FFFF;
+.O-style{
+    color: 	#009999;
 }
 
 /*
@@ -144,44 +192,44 @@ h2{
 */
 
 .col-0{
-    border-right: 1px solid #00FF00;
-    border-bottom: 1px solid #00FF00;
+    border-right: 1.5px solid #7a7a7a;
+    border-bottom: 1.5px solid #7a7a7a;
 }
 .col-1{
-    border-right: 1px solid #00FF00;
-    border-left: 1px solid #00FF00;
-    border-bottom: 1px solid #00FF00;
+    border-right: 1.5px solid #7a7a7a;
+    border-left: 1.5px solid #7a7a7a;
+    border-bottom: 1.5px solid #7a7a7a;
 }
 .col-2{
-    border-left: 1px solid #00FF00;
-    border-bottom: 1px solid #00FF00;
+    border-left: 1.5px solid #7a7a7a;
+    border-bottom: 1.5px solid #7a7a7a;
 }
 .col-3{
-    border-right: 1px solid #00FF00;
-    border-top: 1px solid #00FF00;
-    border-bottom: 1px solid #00FF00;
+    border-right: 1.5px solid #7a7a7a;
+    border-top: 1.5px solid #7a7a7a;
+    border-bottom: 1.5px solid #7a7a7a;
 }
 .col-4{
-    border-right: 1px solid #00FF00;
-    border-left: 1px solid #00FF00;
-    border-bottom: 1px solid #00FF00;
-    border-top: 1px solid #00FF00;
+    border-right: 1.5px solid #7a7a7a;
+    border-left: 1.5px solid #7a7a7a;
+    border-bottom: 1.5px solid #7a7a7a;
+    border-top: 1.5px solid #7a7a7a;
 }
 .col-5{
-    border-left: 1px solid #00FF00;
-    border-top: 1px solid #00FF00;
-    border-bottom: 1px solid #00FF00;
+    border-left: 1.5px solid #7a7a7a;
+    border-top: 1.5px solid #7a7a7a;
+    border-bottom: 1.5px solid #7a7a7a;
 }
 .col-6{
-    border-right: 1px solid #00FF00;
-    border-top: 1px solid #00FF00;
+    border-right: 1.5px solid #7a7a7a;
+    border-top: 1.5px solid #7a7a7a;
 }
 .col-7{
-    border-right: 1px solid #00FF00;
-    border-left: 1px solid #00FF00;
-    border-top: 1px solid #00FF00;
+    border-right: 1.5px solid #7a7a7a;
+    border-left: 1.5px solid #7a7a7a;
+    border-top: 1.5px solid #7a7a7a;
 }
 .col-8{
-    border-left: 1px solid #00FF00;
-    border-top: 1px solid #00FF00;
+    border-left: 1.5px solid #7a7a7a;
+    border-top: 1.5px solid #7a7a7a;
 }
