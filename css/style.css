@@ -131,7 +131,7 @@ h2{
     display: flex;
     width: 65%;
     margin: 0 auto;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .player-turn{
@@ -241,4 +241,24 @@ h2{
 .col-8{
     border-left: 1.5px solid #7a7a7a;
     border-top: 1.5px solid #7a7a7a;
+}
+
+/*---- Mobile View ---- */
+@media (max-width: 900px){
+    h1{
+        font-size: 4rem;
+    }
+    .player-one-name, .player-two-name{
+        font-size: 0.95rem;
+    }
+    .info-form{
+        width: 50%;
+    }
+    .player-info{
+        width: 90%;
+    }
+    .col{
+        width: 16vw;
+        height: 16vw;
+    }
 }
