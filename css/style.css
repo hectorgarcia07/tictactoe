@@ -1,5 +1,6 @@
-html, body, main{
+html, body, main, canvas{
     height: 100%;
+    width: 100%
 }
 
 body{
@@ -150,7 +151,7 @@ h2{
     font-family: 'Roboto', sans-serif;
 }
 
-.X-style, .O-style{
+.X-style, .O-style, .X-style-hover, .O-style-hover{
     font-family: 'Cantata One', serif;
 }
 
@@ -160,6 +161,14 @@ h2{
 
 .O-style{
     color: 	#009999;
+}
+
+.X-style-hover{
+    color: #aa008054;
+}
+
+.O-style-hover{
+    color: 	#00999954;
 }
 
 /*

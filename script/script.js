@@ -55,16 +55,21 @@ const GameBoard = (() => {
         displayCurrentPlayer.className = currPlayerTile() + "-style"
     }
 
-    //add click event to cells
+    //add click and hover event to cells
     const addEvents = () => {
         board.forEach(cell => {
             cell.addEventListener("click", makeMove);
+            cell.addEventListener("mouseenter", showHoverTile)
+            cell.addEventListener("mouseleave", removeHoverTile)
         });
     }
 
     //check if cell is empty
     const isEmptyCell = function(){
-        return (this.innerText == "") ? true : false
+        if (this.innerText == "" || this.childNodes[0].classList.contains(currPlayerTile() + "-style-hover")){
+            return true
+        }
+        return false
     }
 
     //place where user clicked
@@ -113,6 +118,22 @@ const GameBoard = (() => {
         
         //no winners found
         return false
+    }
+
+    //only hover on tile if it is empty
+    const showHoverTile = function(){
+        if (this.childNodes[0].innerText == "")
+        {
+            this.childNodes[0].innerText = currPlayerTile()
+            this.childNodes[0].classList.add(currPlayerTile() + "-style-hover")
+        }
+    }
+
+    const removeHoverTile = function(){
+        if (this.childNodes[0].classList.contains(currPlayerTile() + "-style-hover")) {
+            this.childNodes[0].innerText = ""
+            this.childNodes[0].classList.remove(currPlayerTile() + "-style-hover")
+        }
     }
 
     const makeMove = function(){
